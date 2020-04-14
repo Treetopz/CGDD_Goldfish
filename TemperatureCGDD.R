@@ -3,13 +3,14 @@
 library(data.table)
 library(lubridate)
 library(tidyverse)
+library(plotly)
 
 setwd("K:/Today23/Goldfish CGDD/Data/DOT for Christine/Binds_For_CGDD")
 
-df <- fread("df.final.csv")
+df <- fread("df.final2.csv")
 
-df$Date.Time <- mdy_hm(df$Date.Time)
-df$Date.Time.UTC <- mdy_hm(df$Date.Time.UTC)
+df$Date.Time <- ymd_hms(df$Date.Time)
+df$Date.Time.UTC <- ymd_hms(df$Date.Time.UTC)
 df <- df[,c(2:8)]
 df$Use <- as.logical(df$Use)
 
@@ -61,4 +62,13 @@ for (i in 1:length(summaryCGDD2)){
   
 }
 
-ggplot(summaryCGDD3, aes(Date, CGDD)) + geom_line(aes(colour = Site))
+#filter out everything before 2018
+summaryCGDD4 <- summaryCGDD3[summaryCGDD3$Year >= 2018,]
+#plot for checking calculations
+p <-  ggplot(summaryCGDD4, aes(Date, CGDD)) + geom_line(aes(colour = Site))
+ggplotly(p)
+
+
+
+#test script
+

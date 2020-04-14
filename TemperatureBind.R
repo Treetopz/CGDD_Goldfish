@@ -56,7 +56,7 @@ setwd(wd)
 fileList <- list.files(pattern = "*.csv")
 
 #port in Fall 2018
-for (i in 7:length(fileList)){
+for (i in 1:length(fileList)){
   
   #draw data  
   dfTemp <- fread(fileList[i])
@@ -113,5 +113,5 @@ for (j in 1:length(fileList)){
 }
 
 #----------------------------------------------------------------------------------
-
-write.csv(df.final, "df.final.csv")
+setwd("K:/Today23/Goldfish CGDD/Data/DOT for Christine/Binds_For_CGDD")
+write.csv(df.final, "df.final2.csv")

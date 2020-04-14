@@ -64,11 +64,18 @@ for (i in 1:length(summaryCGDD2)){
 
 #filter out everything before 2018
 summaryCGDD4 <- summaryCGDD3[summaryCGDD3$Year >= 2018,]
+
+write.csv(summaryCGDD4, "summaryCGDD4.csv")
+
+
 #plot for checking calculations
 p <-  ggplot(summaryCGDD4, aes(Date, CGDD)) + geom_line(aes(colour = Site))
 ggplotly(p)
 
 
+#reshape data to wide format
+summaryCGDD4.2 <- summaryCGDD4[,c(1:3,10)]
+summaryCGDD4.wide <- summaryCGDD4.2 %>% group_by(Site) %>%
+                    spread(Site, CGDD)
 
-#test script
-
+write.csv(summaryCGDD4.wide, "summaryCGDD4.wide.csv")
